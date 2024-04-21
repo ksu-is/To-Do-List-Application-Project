@@ -1,5 +1,5 @@
 # To-Do-List-Application-Project
-Tutorial Link: https://www.youtube.com/watch?v=1XDZ9Dy6qo4
+Youtube Tutorial Link: https://www.youtube.com/watch?v=1XDZ9Dy6qo4
 
 Refrence Repository: https://github.com/ksu-is/To-Do-list-/blob/main/maincode.py
 
