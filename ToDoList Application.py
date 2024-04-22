@@ -1,17 +1,16 @@
 # For reference I used aosojkic's Github Repository as well as a Youtube video tutorial.
 # Code Change 1: Rewrite The To Do List Menu by adding more options
 def show_menu():
-    print("Welcome To The")
     print("----To-Do-List Application----")
     print("1. View To-Do-List ")
     print("2. Add Task ")
     print("3. Delete a Task ")
     print("4. Set a Reminder ")
-    print("5. View Reminders ")
+    print("5. View Reminder ")
     print("6. Mark Task as complete ")
     print("7. Set a deadline ")
-    print("8. View Deadlines")
-    print("9. View Completed Tasks")
+    print("8. View Deadline")
+    print("9. View Completed Task")
     print("10. Exit")
 # The list where the tasks, reminders, Competed Tasks and Deadlines are stored
 tasks = []
@@ -33,15 +32,15 @@ def add_task():
     task = input("Enter a new Task: ")
     tasks.append(task)
     print("Task has been added successfully ")  
+    set_reminder(task)
 
 
-deadline_input = input("Enter th")
 
 # The User has the ability to mark a task as complete
 def complete_task():
     completedtask = input( "Enter The number for the task that you want to complete. ")
-    completedtasks.append(completedtasks)
-    print("Task is complete:" + completedtasks)
+    completedtasks.append(tasks[int(completedtasks)])
+    print("Task is complete:" + tasks[int(completedtasks)])
 
 
 # Code Change 2: Here is where you can view the tasks that you have completed 
@@ -65,17 +64,15 @@ def delete_tasks():
 
         if 0 < choice <= len(tasks):
             del tasks[choice-1]
-            print("Task is deleted")
+            print("Task has been deleted")
         else:
-            print("Invalid Task number")
+            print("Invalid input")
 
 
 # Code Change 3: Here is where The User can set reminders for the tasks       
-def set_reminder():
-    task_number = int(input("Enter the number of the task you want to set a reminder for: "))
-    if 1 <= task_number <= len(tasks):
-        reminder = input("Enter a new Reminder: ")
-        reminders.append((tasks[task_number - 1], reminder))
+def set_reminder(task):
+    reminder = input("Enter a New Reminder ")
+    reminders.append((task, reminder))
 
     
 # Code Change 4: here is where The user can view the reminders
@@ -89,14 +86,19 @@ def view_reminders():
 
 # Code Change 5: Here is where you add Deadlines to a Task
 def add_deadline():
-        task_number = int(input("Enter the number if the task you want to set a deadline for"))
-        print(tasks)
-        if 1 <= task_number <= len(tasks):
-            deadline = input("Enter a new Deadline: ")
-            deadlines.append((tasks[task_number - 1], deadline))
-            print("deadline set. ")
+        if len(tasks) == 0:
+            print("There are no tasks to set deadlines for. ")
         else:
-            print("Invalid Task number.")
+            print(tasks)
+            for i, task in enumerate(tasks, start=1):
+                print(str(i) + "." + task)
+            task_number = int(input("Enter The number Of the Task you want to set a deadline for: "))
+            if 1 <= task_number <= len(tasks):
+                deadline = input("Enter a new Deadline: ")
+                deadlines.append((tasks[task_number - 1], deadline))
+                print("Deadline set: ")
+            else:
+                print("Invalid Task Number")
 
 # Code Change 6: This is where you can view your deadlines for your tasks. 
 def view_deadlines():
