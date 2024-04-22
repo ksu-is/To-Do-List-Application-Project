@@ -47,7 +47,7 @@ def complete_task():
 # Code Change 2: Here is where you can view the tasks that you have completed 
 def view_completedTasks():
     if len(completedtasks) == 0:
-        print("Your Completed Tasks list is empty ")
+        print("You Have not completed any tasks ")
     else:
         print("These are all the tasks that you have completed: ")
         for i, reminder in enumerate(reminders):
