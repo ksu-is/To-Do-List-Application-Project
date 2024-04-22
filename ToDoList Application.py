@@ -1,6 +1,7 @@
 # For reference I used aosojkic's Github Repository as well as a Youtube video tutorial.
 # Code Change 1: Rewrite The To Do List Menu by adding more options
 def show_menu():
+    print("Welcome To The")
     print("----To-Do-List Application----")
     print("1. View To-Do-List ")
     print("2. Add Task ")
@@ -18,7 +19,7 @@ reminders = []
 completedtasks = []
 deadlines = []
 
-# Here is the function for viewing the Tasks
+# Here is the function for viewing the tasks
 def task_view():
     if len(tasks) == 0:
         print("Your to-do list is empty")
