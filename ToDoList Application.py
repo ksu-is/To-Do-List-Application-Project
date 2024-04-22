@@ -77,9 +77,22 @@ def delete_tasks():
 
 
 # Code Change 3: Here is where The User can set reminders for the tasks       
-def set_reminder(task):
-    reminder = input("Enter a New Reminder ")
-    reminders.append((task, reminder))
+def set_reminder():
+  if len(tasks) == 0:
+        print("There are no tasks to set a reminder for.")
+  else:
+        task_number = int(input("Enter the number of the task you want to set a reminder for: "))
+        if 1 <= task_number <= len(tasks):
+            set_reminder(tasks[task_number - 1])
+        else:
+            print("Invalid task number") 
+def add_reminder(task):
+    reminder = input("Enter a New Reminder: ").strip()
+    if reminder:
+        reminders.append((task, reminder))
+        print("Reminder set for task:", task)
+    else:
+        print("Reminder cannot be empty. Please enter a valid reminder.")
 
     
 # Code Change 4: here is where The user can view the reminders
@@ -94,9 +107,14 @@ def view_reminders():
 #Check If any reminders are due
 def check_reminder(): 
     current_time = get_current_time()
-    for reminder in reminders:
-        if current_time == reminder[1]:
-            print("Reminder:" + reminder[0])
+    if len(reminders) == 0:
+        print("There are no reminders.")
+    else:
+         task_number = input( "Enter The number for the task that you want to complete. ")
+         for i, reminder in enumerate(reminders):
+          if int(task_number) == i:
+              if current_time == reminder[1]:
+                  print("Reminder:" + reminder[0])
 
 def get_current_time():
     current_time = time.strftime("%H:%M")
