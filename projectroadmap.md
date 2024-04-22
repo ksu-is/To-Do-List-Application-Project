@@ -9,8 +9,8 @@
 - Sprint 2
 - [x] Start Coding
 - [x] Make updates to The code
-- [] Commit Code changes through github desktop
-- [] Make 6 Code Changes
+- [x] Commit Code changes through github desktop
+- [x] Make 6 Code Changes
 - 
 
 
