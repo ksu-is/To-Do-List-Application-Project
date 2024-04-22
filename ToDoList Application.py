@@ -13,7 +13,8 @@ def show_menu():
     print("7. Set a deadline ")
     print("8. View Deadline")
     print("9. View Completed Task")
-    print("10. Exit")
+    print("10. Check Reminder")
+    print("11. Exit")
 # The list where the tasks, reminders, Competed Tasks and Deadlines are stored
 tasks = []
 reminders = []
@@ -35,14 +36,18 @@ def add_task():
     tasks.append(task)
     print("Task has been added successfully ")  
     set_reminder(task)
+    
 
 
 
 # The User has the ability to mark a task as complete
 def complete_task():
-    completedtask = input( "Enter The number for the task that you want to complete. ")
-    completedtasks.append(tasks[int(completedtasks)])
-    print("Task is complete:" + tasks[int(completedtasks)])
+    if len(tasks) == 0:
+        print("There are no tasks.")
+    else:
+         completedtask = input( "Enter The number for the task that you want to complete. ")
+         completedtasks.append(tasks[int(completedtasks)])
+         print("Task is complete:" + tasks[int(completedtasks)])
 
 
 # Code Change 2: Here is where you can view the tasks that you have completed 
@@ -94,7 +99,8 @@ def check_reminder():
             print("Reminder:" + reminder[0])
 
 def get_current_time():
-    return "3:15"
+    current_time = time.strftime("%H:%M")
+    return current_time
 
 # Code Change 5: Here is where you add Deadlines to a Task
 def add_deadline():
@@ -124,7 +130,7 @@ def view_deadlines():
 def main():
     while True:
         show_menu()
-        check_reminder()
+        
 
        # These are The menu options, where you can select what you want to do
         choice = input("Enter a your choice 1-10: ")
@@ -145,8 +151,10 @@ def main():
         elif choice == "8":
             view_deadlines()
         elif choice == "9":
+            check_reminder()
+        elif choice == "10":     
             view_completedTasks()
-        elif choice == "10":
+        elif choice == "11":
             print("Goodbye!")
             break
         else:
