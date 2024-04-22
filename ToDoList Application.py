@@ -1,5 +1,7 @@
 # For reference I used aosojkic's Github Repository as well as a Youtube video tutorial.
 # Code Change 1: Rewrite The To Do List Menu by adding more options
+import time
+
 def show_menu():
     print("----To-Do-List Application----")
     print("1. View To-Do-List ")
@@ -82,7 +84,17 @@ def view_reminders():
     else:
         print("list of Reminders:")
         for i, reminder in enumerate(reminders):
-            print(str(i) + "." + reminder)
+            print(str(i) + "." + reminder[1])
+
+#Check If any reminders are due
+def check_reminder(): 
+    current_time = get_current_time()
+    for reminder in reminders:
+        if current_time == reminder[1]:
+            print("Reminder:" + reminder[0])
+
+def get_current_time():
+    return "3:15"
 
 # Code Change 5: Here is where you add Deadlines to a Task
 def add_deadline():
@@ -107,11 +119,12 @@ def view_deadlines():
     else:
         print("list of deadline:")
         for i, (task, deadline) in enumerate(deadlines, start=1):
-            print(str(i) + ".Task" + task +" have this task done by: " + deadline)
+            print(str(i) + ". Task" + task + ", have this task done by: " + deadline)
 
 def main():
     while True:
         show_menu()
+        check_reminder()
 
        # These are The menu options, where you can select what you want to do
         choice = input("Enter a your choice 1-10: ")
