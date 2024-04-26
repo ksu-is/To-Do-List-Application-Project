@@ -1,6 +1,6 @@
 # For reference I used aosojkic's Github Repository as well as a Youtube video tutorial.
 # Code Change 1: Rewrite The To Do List Menu by adding more options
-import time
+
 
 def show_menu():
     print("----Welcome To TaskPro----")
@@ -10,11 +10,13 @@ def show_menu():
     print("3. Delete a Task ")
     print("4. Set a Reminder ")
     print("5. View Reminders ")
-    print("6. Mark Task as complete ")
-    print("7. Set a deadline ")
-    print("8. View Deadlines")
-    print("9. View Completed Task")
-    print("10. Exit")
+    print("6. Delete Reminders")
+    print("7. Mark Task as complete ")
+    print("8. Set a deadline ")
+    print("9. Delete Deadlines")
+    print("10. View Deadlines")
+    print("11. View Completed Tasks")
+    print("12. Exit")
 # The list where the tasks, reminders, Competed Tasks and Deadlines are stored
 tasks = []
 reminders = []
@@ -27,7 +29,7 @@ def task_view():
         print("Your to-do list is empty")
     else:
         print("list of tasks:")
-        for i, task in enumerate(tasks):
+        for i, task in enumerate(tasks, start=1):
             print(str(i) + "." + task)
 
 # This is where we Adding Task
@@ -58,7 +60,7 @@ def view_completedTasks():
         print("You Have not completed any tasks ")
     else:
         print("These are all the tasks that you have completed: ")
-        for i, reminder in enumerate(completedtasks):
+        for i, reminder in enumerate(completedtasks, start=1):
             print(str(i) + "." + reminder)
 
 # When the Task is complete we remove it from the task list    
@@ -69,7 +71,7 @@ def delete_tasks():
         print("Tasks:")
         for i, task in enumerate(tasks, start=1):
             print(str(i) + "." + task)
-        choice = int(input("Enter the task that you want to delete:"))
+        choice = int(input("Enter the number for the task that you want to delete:"))
 
         if 0 < choice <= len(tasks):
             del tasks[choice-1]
@@ -80,7 +82,7 @@ def delete_tasks():
 
 # Code Change 3: Here is where The User can set reminders for the tasks       
 def set_reminder():
-  reminder = input("Enter A new Reminder: ").strip()
+  reminder = input("Enter A new Reminder: ")
   reminders.append((reminder))
   print("Reminder set: " , reminder)
  
@@ -93,13 +95,26 @@ def view_reminders():
         print("Your Reminder list is empty")
     else:
         print("list of Reminders:")
-        for i, reminder in enumerate(reminders):
+        for i, reminder in enumerate(reminders, start=1):
             print(str(i) + "." + reminder)
 
-#Check If any reminders are due
-def get_current_time():
-    current_time = time.strftime("%H:%M")
-    return current_time
+def delete_reminders():
+    if len(reminders) == 0:
+        print("there are no reminders to delete. ")
+    else:
+        print("reminders:")
+        for i, reminder in enumerate(reminders, start=1):
+            print(str(i) + "." + reminder)
+        choice = int(input("Enter the number for the reminder that you want to delete:"))
+
+        if 0 < choice <= len(reminders):
+            del reminders[choice-1]
+            print("reminder has been deleted")
+        else:
+            print("Invalid input")
+
+
+
 
 # Code Change 5: Here is where you add Deadlines to a Task
 def add_deadline():
@@ -109,26 +124,45 @@ def add_deadline():
             print("Tasks")
             for i, task in enumerate(tasks, start=1):
                 print(str(i) + "." + task)
-            task_number = int(input("Enter The number Of the Task you want to set a deadline for: "))
+            task_number = int(input("Enter The number of the Task you want to set a deadline for: "))
             if 1 <= task_number <= len(tasks):
                 deadline = input("Enter a new Deadline: ")
                 deadlines.append((tasks[task_number - 1], deadline))
-                print("Deadline set: ")
+                print("Deadline has been set: ", task, deadline)
             else:
                 print("Invalid Task Number")
+
+def delete_deadlines():
+    if len(deadlines) == 0:
+        print("there are no deadlines to delete. ")
+    else:
+        print("deadlines:")
+        for i, deadline in enumerate(deadlines, start=1):
+            print(str(i) + "." + deadline)
+        choice = int(input("Enter the number for the reminder that you want to delete:"))
+
+        if 0 < choice <= len(deadlines):
+            del deadlines[choice-1]
+            print("Deadline has been deleted")
+        else:
+            print("Invalid input")
+
 
 # Code Change 6: This is where you can view your deadlines for your tasks. 
 def view_deadlines():
     if len(deadlines) == 0:
         print("Your deadline list is empty")
     else:
-        print("list of deadline:")
+        print("list of deadlines:")
         for i, (task, deadline) in enumerate(deadlines, start=1):
-            print(str(i) + ". Task" + task + ", have this task done by: " + deadline)
+            print(str(i) + ". Task " + task + ", have this task done by: " + deadline)
+
+
 
 def main():
     while True:
         show_menu()
+       
         
 
        # These are The menu options, where you can select what you want to do
@@ -144,14 +178,18 @@ def main():
         elif choice == "5":
             view_reminders()
         elif choice == "6":
-            complete_task()
+            delete_reminders()
         elif choice == "7":
-            add_deadline()
+            complete_task()
         elif choice == "8":
+            add_deadline()
+        elif choice == "9":
+            delete_deadlines()
+        elif choice == "10":     
             view_deadlines()
-        elif choice == "9":     
+        elif choice == "11":
             view_completedTasks()
-        elif choice == "10":
+        elif choice == "12":
             print("Goodbye!")
             break
         else:
