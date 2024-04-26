@@ -3,18 +3,18 @@
 import time
 
 def show_menu():
-    print("----To-Do-List Application----")
+    print("----Welcome To TaskPro----")
+    print("Please Select one of the following menu options")
     print("1. View To-Do-List ")
     print("2. Add Task ")
     print("3. Delete a Task ")
     print("4. Set a Reminder ")
-    print("5. View Reminder ")
+    print("5. View Reminders ")
     print("6. Mark Task as complete ")
     print("7. Set a deadline ")
-    print("8. View Deadline")
+    print("8. View Deadlines")
     print("9. View Completed Task")
-    print("10. Check Reminder")
-    print("11. Exit")
+    print("10. Exit")
 # The list where the tasks, reminders, Competed Tasks and Deadlines are stored
 tasks = []
 reminders = []
@@ -35,7 +35,7 @@ def add_task():
     task = input("Enter a new Task: ")
     tasks.append(task)
     print("Task has been added successfully ")  
-    set_reminder(task)
+    
     
 
 
@@ -45,9 +45,11 @@ def complete_task():
     if len(tasks) == 0:
         print("There are no tasks.")
     else:
-         completedtask = input( "Enter The number for the task that you want to complete. ")
-         completedtasks.append(tasks[int(completedtasks)])
-         print("Task is complete:" + tasks[int(completedtasks)])
+         completed_task = input( "Enter The number for the task that you want to complete. ")
+         completed_task_index = int(completed_task)
+         if 0 <= completed_task_index < len(tasks):
+            completedtasks.append(tasks.pop(completed_task_index))
+            print("Task is complete:" )
 
 
 # Code Change 2: Here is where you can view the tasks that you have completed 
@@ -56,7 +58,7 @@ def view_completedTasks():
         print("You Have not completed any tasks ")
     else:
         print("These are all the tasks that you have completed: ")
-        for i, reminder in enumerate(reminders):
+        for i, reminder in enumerate(completedtasks):
             print(str(i) + "." + reminder)
 
 # When the Task is complete we remove it from the task list    
@@ -78,21 +80,11 @@ def delete_tasks():
 
 # Code Change 3: Here is where The User can set reminders for the tasks       
 def set_reminder():
-  if len(tasks) == 0:
-        print("There are no tasks to set a reminder for.")
-  else:
-        task_number = int(input("Enter the number of the task you want to set a reminder for: "))
-        if 1 <= task_number <= len(tasks):
-            set_reminder(tasks[task_number - 1])
-        else:
-            print("Invalid task number") 
-def add_reminder(task):
-    reminder = input("Enter a New Reminder: ").strip()
-    if reminder:
-        reminders.append((task, reminder))
-        print("Reminder set for task:", task)
-    else:
-        print("Reminder cannot be empty. Please enter a valid reminder.")
+  reminder = input("Enter A new Reminder: ").strip()
+  reminders.append((reminder))
+  print("Reminder set: " , reminder)
+ 
+
 
     
 # Code Change 4: here is where The user can view the reminders
@@ -102,20 +94,9 @@ def view_reminders():
     else:
         print("list of Reminders:")
         for i, reminder in enumerate(reminders):
-            print(str(i) + "." + reminder[1])
+            print(str(i) + "." + reminder)
 
 #Check If any reminders are due
-def check_reminder(): 
-    current_time = get_current_time()
-    if len(reminders) == 0:
-        print("There are no reminders.")
-    else:
-         task_number = input( "Enter The number for the task that you want to complete. ")
-         for i, reminder in enumerate(reminders):
-          if int(task_number) == i:
-              if current_time == reminder[1]:
-                  print("Reminder:" + reminder[0])
-
 def get_current_time():
     current_time = time.strftime("%H:%M")
     return current_time
@@ -125,7 +106,7 @@ def add_deadline():
         if len(tasks) == 0:
             print("There are no tasks to set deadlines for. ")
         else:
-            print(tasks)
+            print("Tasks")
             for i, task in enumerate(tasks, start=1):
                 print(str(i) + "." + task)
             task_number = int(input("Enter The number Of the Task you want to set a deadline for: "))
@@ -168,11 +149,9 @@ def main():
             add_deadline()
         elif choice == "8":
             view_deadlines()
-        elif choice == "9":
-            check_reminder()
-        elif choice == "10":     
+        elif choice == "9":     
             view_completedTasks()
-        elif choice == "11":
+        elif choice == "10":
             print("Goodbye!")
             break
         else:
