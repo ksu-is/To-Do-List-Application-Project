@@ -11,7 +11,8 @@
 - [x] Make updates to The code
 - [x] Commit Code changes through github desktop
 - [x] Make 6 Code Changes
-- 
+- Sprint 3
+- [x] Create and Upload Splash Powerpoint
 
 
 
