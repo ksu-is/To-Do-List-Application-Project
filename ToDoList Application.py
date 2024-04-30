@@ -1,7 +1,5 @@
-# For reference I used aosojkic's Github Repository as well as a Youtube video tutorial.
+
 # Code Change 1: Rewrite The To Do List Menu by adding more options
-
-
 def show_menu():
     print("----Welcome To TaskPro----")
     print("Please Select one of the following menu options")
@@ -47,11 +45,17 @@ def complete_task():
     if len(tasks) == 0:
         print("There are no tasks.")
     else:
-         completed_task = input( "Enter The number for the task that you want to complete. ")
-         completed_task_index = int(completed_task)
-         if 0 <= completed_task_index < len(tasks):
-            completedtasks.append(tasks.pop(completed_task_index))
-            print("Task is complete:" )
+        completed_task = input( "Enter The number for the task that you want to complete. ")
+        if completed_task.isdigit():
+             completed_task_index = int(completed_task)
+             if 0 <= completed_task_index < len(tasks):
+                 completedtasks.append(tasks.pop(completed_task_index - 1))
+                 print("Task is complete: ")
+             else:
+                print("Invalid task number.")
+        else:
+           print("Invalid input. Please enter a number")
+
 
 
 # Code Change 2: Here is where you can view the tasks that you have completed 
@@ -61,7 +65,7 @@ def view_completedTasks():
     else:
         print("These are all the tasks that you have completed: ")
         for i, reminder in enumerate(completedtasks, start=1):
-            print(str(i) + "." + reminder)
+            print(str(i) + "." + ". [x] " + reminder)
 
 # When the Task is complete we remove it from the task list    
 def delete_tasks():
@@ -98,6 +102,7 @@ def view_reminders():
         for i, reminder in enumerate(reminders, start=1):
             print(str(i) + "." + reminder)
 
+# Code Change 5: Delete The reminders From your List.
 def delete_reminders():
     if len(reminders) == 0:
         print("there are no reminders to delete. ")
@@ -131,15 +136,15 @@ def add_deadline():
                 print("Deadline has been set: ", task, deadline)
             else:
                 print("Invalid Task Number")
-
+# Here is where you can delete the deadlines once they have passed.
 def delete_deadlines():
     if len(deadlines) == 0:
         print("there are no deadlines to delete. ")
     else:
         print("deadlines:")
-        for i, deadline in enumerate(deadlines, start=1):
-            print(str(i) + "." + deadline)
-        choice = int(input("Enter the number for the reminder that you want to delete:"))
+        for i, (task,deadline) in enumerate(deadlines, start=1):
+            print(str(i) + ".Task: " + task + ", Deadline: " + deadline)
+        choice = int(input("Enter the number for the deadline that you want to delete:"))
 
         if 0 < choice <= len(deadlines):
             del deadlines[choice-1]
@@ -166,7 +171,7 @@ def main():
         
 
        # These are The menu options, where you can select what you want to do
-        choice = input("Enter a your choice 1-10: ")
+        choice = input("Enter a your choice 1-12: ")
         if choice == "1":
             task_view()
         elif choice == "2":
@@ -193,7 +198,7 @@ def main():
             print("Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter a number between 1 and 10")
+            print("Invalid choice. Please enter a number between 1 and 12")
 
 
 if __name__ == "__main__":
